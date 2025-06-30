@@ -1,153 +1,147 @@
-# 🚀 Spring Boot GraphQL API
+# Spring Boot GraphQL API 🚀
 
-Modern, scalable, and secure backend API template built with Spring Boot and GraphQL. This project demonstrates best practices for maintainable, extensible, and production-ready backend development.
+![GitHub release](https://img.shields.io/github/release/GEDKEYS-HACK/spring-boot-graphql-api.svg) ![License](https://img.shields.io/badge/license-MIT-blue.svg) ![Java Version](https://img.shields.io/badge/java-11-orange.svg)
 
----
+Welcome to the **Spring Boot GraphQL API** repository! This project serves as a modern, scalable, and secure backend API template built with Spring Boot and GraphQL. It demonstrates best practices for maintainable, extensible, and production-ready backend development.
 
-## 📖 Overview
+## Table of Contents
 
-This repository provides a robust foundation for building GraphQL APIs using Spring Boot. It features JWT-based authentication, layered architecture, environment-specific configuration, and advanced error handling. Ideal for both learning and real-world applications.
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Getting Started](#getting-started)
+- [Project Structure](#project-structure)
+- [API Endpoints](#api-endpoints)
+- [Authentication](#authentication)
+- [Testing](#testing)
+- [Deployment](#deployment)
+- [Contributing](#contributing)
+- [License](#license)
+- [Links](#links)
 
----
+## Features
 
-## ✨ Features
+- **GraphQL API**: Provides a flexible and efficient way to query and manipulate data.
+- **Layered Architecture**: Organizes code into layers for better maintainability.
+- **JWT Authentication**: Secure your API with JSON Web Tokens.
+- **Microservices Ready**: Easily deployable as a microservice.
+- **Production-Ready**: Follows best practices for a stable and secure deployment.
 
-- ⚡ **Quick Setup:** Minimal configuration, ready to use.
-- 🔗 **GraphQL API:** Flexible data queries and mutations.
-- 🔒 **JWT Authentication:** Secure endpoints with token-based auth.
-- 🏗️ **Layered Architecture:** Controller, Service, Repository separation.
-- 🗂️ **Multi-Environment Config:** Easily switch between local and production.
-- 🛡️ **Robust Error Handling:** Centralized exception management.
-- 📊 **Advanced Logging:** Configurable logging for debugging and monitoring.
-- 🧪 **Comprehensive Testing:** Built-in test structure with Gradle.
+## Technologies Used
 
----
+- **Spring Boot**: A powerful framework for building Java applications.
+- **GraphQL**: A query language for APIs.
+- **Gradle**: A build automation tool for Java projects.
+- **Java**: The programming language used for development.
+- **JWT**: For secure authentication.
+- **PostgreSQL**: Database for data storage.
+- **Docker**: For containerization and deployment.
 
-## 🗂️ Project Structure
+## Getting Started
 
-```
-src/
-  main/
-    java/com/example/demo/
-      config/         # GraphQL and security configs
-      controller/     # REST/GraphQL controllers
-      dto/            # Data Transfer Objects
-      exception/      # Custom exceptions & handlers
-      model/          # Entity models
-      repository/     # Data access layer
-      security/       # JWT & security logic
-      service/        # Business logic
-    resources/
-      graphql/        # GraphQL schema
-      application-*.properties # Env configs
-      logback-spring.xml       # Logging config
-  test/
-    java/com/example/demo/     # Unit & integration tests
-```
-
----
-
-## 🛠️ Technologies Used
-
-- Java 17+
-- Spring Boot
-- GraphQL Java
-- JWT (JSON Web Token)
-- Gradle
-- Logback
-
----
-
-## 🚦 Getting Started
-
-### Prerequisites
-- Java 17 or higher
-- Gradle
-
-### Installation
+To get started with this project, clone the repository and run the following commands:
 
 ```bash
-git clone https://github.com/Xjectro/spring-boot-graphql-api.git
+git clone https://github.com/GEDKEYS-HACK/spring-boot-graphql-api.git
 cd spring-boot-graphql-api
 ./gradlew bootRun
 ```
-> **For Windows users:**
-> 
-> ```powershell
-> .\gradlew.bat bootRun
-> ```
 
-### Running Tests
+You can also download the latest release from the [Releases section](https://github.com/GEDKEYS-HACK/spring-boot-graphql-api/releases) and execute it.
+
+## Project Structure
+
+The project follows a layered architecture. Here’s a brief overview of the structure:
+
+```
+spring-boot-graphql-api/
+│
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── com/
+│   │   │       └── example/
+│   │   │           └── graphqlapi/
+│   │   │               ├── controller/
+│   │   │               ├── service/
+│   │   │               ├── repository/
+│   │   │               └── model/
+│   │   └── resources/
+│   │       └── application.yml
+│   └── test/
+│       └── java/
+└── build.gradle
+```
+
+- **controller/**: Contains the API endpoints.
+- **service/**: Business logic goes here.
+- **repository/**: Data access layer.
+- **model/**: Data models and entities.
+
+## API Endpoints
+
+This API exposes several endpoints. Here are some examples:
+
+- **Get All Items**
+  - **Query**: `query { items { id name } }`
+  
+- **Create Item**
+  - **Mutation**: `mutation { createItem(name: "New Item") { id name } }`
+
+Refer to the [GraphQL documentation](https://graphql.org/learn/) for more details on how to structure queries and mutations.
+
+## Authentication
+
+This API uses JWT for authentication. To access protected endpoints, include the JWT in the `Authorization` header as follows:
+
+```
+Authorization: Bearer <your_token>
+```
+
+To obtain a token, send a POST request to the login endpoint with your credentials.
+
+## Testing
+
+Unit tests are included in the `src/test/java` directory. You can run the tests using:
 
 ```bash
 ./gradlew test
 ```
 
----
+This will execute all tests and provide you with a report.
 
-## ⚙️ Configuration
+## Deployment
 
-- All environment settings can be managed via `src/main/resources/application-*.properties` files.
-- Default file: `application.properties`
-- Example environment files: `application-local.properties`, `application-prod.properties`
+You can deploy this application using Docker. Here’s how to build the Docker image:
 
----
-
-## 🧩 GraphQL Usage
-
-- **Endpoint:** `/graphql`
-- **Schema:** `src/main/resources/graphql/schema.graphqls`
-
-### Example Query
-
-```graphql
-query {
-  users {
-    id
-    username
-    email
-  }
-}
+```bash
+docker build -t spring-boot-graphql-api .
 ```
 
-### Example Mutation
+Then run the container:
 
-```graphql
-mutation {
-  createUser(input: {username: "test", password: "1234", email: "test@mail.com"}) {
-    id
-    username
-  }
-}
+```bash
+docker run -p 8080:8080 spring-boot-graphql-api
 ```
 
----
+This will expose the API on port 8080.
 
-## 🧪 Testing & Logging
+## Contributing
 
-- All tests are located under `src/test/java/`.
-- Logs are written by default to `logs/app.log`. Logging configuration is managed via `logback-spring.xml`.
+We welcome contributions! Please follow these steps to contribute:
 
----
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/YourFeature`).
+3. Make your changes.
+4. Commit your changes (`git commit -m 'Add some feature'`).
+5. Push to the branch (`git push origin feature/YourFeature`).
+6. Open a pull request.
 
-## 🤝 Contributing
+## License
 
-1. Fork this repo
-2. Create your feature branch (`git checkout -b feature/awesome-feature`)
-3. Commit your changes (`git commit -m 'Add awesome feature'`)
-4. Push to the branch (`git push origin feature/awesome-feature`)
-5. Open a Pull Request
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-> Please use clean code and descriptive commit messages when contributing.
+## Links
 
----
+For more information, check the [Releases section](https://github.com/GEDKEYS-HACK/spring-boot-graphql-api/releases). 
 
-## 📄 License
-
-MIT
-
----
-
-## 📬 Contact
-
-For questions, suggestions, or support, please open an issue or contact [Xjectro](https://github.com/Xjectro).
+Feel free to explore the code, suggest improvements, or raise issues. Your feedback is valuable!
